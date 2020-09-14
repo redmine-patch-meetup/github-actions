@@ -1,0 +1,23 @@
+name: Sync redmine-dev-mirror with redmine/redmine
+
+on:
+  schedule:
+    - cron: "0 19 * * *" # 4 AM JST
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install gems
+        run: sudo gem install faraday jwt
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Generate Token
+        run: ./generate_token.rb > .token
+        env:
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_INSTALLATION_ID: ${{ secrets.APP_INSTALLATION_ID }}
