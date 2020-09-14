@@ -27,3 +27,5 @@ jobs:
           git config --global user.name "Redmine Patch Meetup"
       - name: Update master to latest redmine/redmine master
         run: ./update-master.sh
+      - name: Rebase pull requests and development branch
+        run: ./rebase_prs_and_development.rb
