@@ -21,3 +21,9 @@ jobs:
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
           APP_ID: ${{ secrets.APP_ID }}
           APP_INSTALLATION_ID: ${{ secrets.APP_INSTALLATION_ID }}
+      - name: Config Github User
+        run: |
+          git config --global user.email "redmine-patch-meetup@redmine-patch-meetup.com"
+          git config --global user.name "Redmine Patch Meetup"
+      - name: Update master to latest redmine/redmine master
+        run: ./update-master.sh
