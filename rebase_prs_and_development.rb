@@ -46,16 +46,7 @@ def rebase_onto_new_development_branch(pr)
   system "git rebase #{base_sha} --onto develop && git push -f"
 end
 
-def push_new_development_branch
-  system 'git checkout develop'
-  system 'git push -f origin develop'
-end
-
-def main
-  Dir.chdir('redmine-dev-mirror')
-
-  rebase_local_development_branch
-
+def rebase_pull_requests
   get_repo_resource('pulls').each do |pr|
     if has_rebase_needed_label?(pr)
       puts "Skip rebase of \"#{pr['title']}\" - Rebase needed"
@@ -68,6 +59,19 @@ def main
     puts "Rebase of \"#{pr['title']}\" failed - Adding label"
     add_rebase_needed_label(pr)
   end
+end
+
+def push_new_development_branch
+  system 'git checkout develop'
+  system 'git push -f origin develop'
+end
+
+def main
+  Dir.chdir('redmine-dev-mirror')
+
+  rebase_local_development_branch
+
+  # rebase_pull_requests
 
   push_new_development_branch
 end
