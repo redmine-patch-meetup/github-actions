@@ -71,7 +71,7 @@ def main
 
   rebase_local_development_branch
 
-  # rebase_pull_requests
+  rebase_pull_requests
 
   push_new_development_branch
 end
