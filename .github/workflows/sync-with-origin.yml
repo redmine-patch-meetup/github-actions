@@ -1,8 +1,8 @@
 name: Sync redmine-dev-mirror with redmine/redmine
 
 on:
-  schedule:
-    - cron: "0 19 * * *" # 4 AM JST
+#   schedule:
+#     - cron: "0 19 * * *" # 4 AM JST
   workflow_dispatch:
 
 jobs:
