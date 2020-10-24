@@ -12,7 +12,7 @@ end
 TOKEN = File.read('.token')
 
 def rebase_local_development_branch
-  system 'git checkout development'
+  system 'git checkout develop'
   system 'git rebase master'
 end
 
@@ -43,12 +43,12 @@ def rebase_onto_new_development_branch(pr)
   branch = pr['head']['ref']
   base_sha = pr['base']['sha']
   system "git checkout #{branch}"
-  system "git rebase #{base_sha} --onto development && git push -f"
+  system "git rebase #{base_sha} --onto develop && git push -f"
 end
 
 def push_new_development_branch
-  system 'git checkout development'
-  system 'git push -f origin development'
+  system 'git checkout develop'
+  system 'git push -f origin develop'
 end
 
 def main
